@@ -12,23 +12,23 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
         test: /\.s[ac]ss$/i,
         use: [
         // Creates `style` nodes from JS strings
-          options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 
-          // Translates CSS into CommonJS
-          {
-            loader: "css-loader",
-            options: {
-                modules: {
-                    auto: (resPath: string) => Boolean(resPath.includes('.module.')),
-                    localIdentName: options.isDev 
-                        ? '[path][name]__[local]' 
-                        : '[hash:base64:8]' 
+            // Translates CSS into CommonJS
+            {
+                loader: 'css-loader',
+                options: {
+                    modules: {
+                        auto: (resPath: string) => Boolean(resPath.includes('.module.')),
+                        localIdentName: options.isDev 
+                            ? '[path][name]__[local]' 
+                            : '[hash:base64:8]' 
+                    }
                 }
-            }
-          },
+            },
 
-          // Compiles Sass to CSS
-          "sass-loader",
+            // Compiles Sass to CSS
+            'sass-loader',
         ],
     }
     const svgLoader = {
@@ -39,33 +39,33 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
     const fileLoader = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
-          {
-            loader: 'file-loader',
-          },
+            {
+                loader: 'file-loader',
+            },
         ],
     }
 
     // транспилятор, который преобразует современный JS для поддержки во всех браузеров
     const babelLoader = {
-      test: /\.(js|jsx|tsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            ['@babel/preset-env']
-          ],
-          "plugins": [
-            [
-              "i18next-extract",
-              {
-                "locales": ["ru", "en"],
-                "keyAsDefaultValue": true
-              }
-            ]
-          ]
+        test: /\.(js|jsx|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    ['@babel/preset-env']
+                ],
+                'plugins': [
+                    [
+                        'i18next-extract',
+                        {
+                            'locales': ['ru', 'en'],
+                            'keyAsDefaultValue': true
+                        }
+                    ]
+                ]
+            }
         }
-      }
     }
     return [
         fileLoader,
