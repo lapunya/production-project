@@ -16,11 +16,14 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
             clean: true
         },
         module: {
-            // тут мы конфигурируем лоадеры, они предназначны для обработки файлов, которые выходят за рамки js
+            // тут мы конфигурируем лоадеры, они предназначны для обработки файлов перед или в процессе генерации 
+            // бандла, которые выходят за рамки js
             rules: buildLoaders(options),
         },
-        resolve: buildResolvers(),
-        plugins: buildPlugins(paths.html),
+        resolve: buildResolvers(options),
+        
+        // плагины позволяют выполнять задачи ПОСЛЕ сборки бандла
+        plugins: buildPlugins(options),
         devtool: isDev ? 'inline-source-map' : false,
         devServer: isDev ? buildDevServer(options) : undefined
     }
