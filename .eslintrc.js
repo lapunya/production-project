@@ -3,7 +3,10 @@ module.exports = {
         browser: true,
         es2021: true,
     },
-    extends: ['plugin:react/recommended'],
+    extends: [
+        'plugin:react/recommended',
+        'plugin:i18next/recommended'
+    ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
@@ -15,6 +18,7 @@ module.exports = {
     plugins: [
         'react',
         '@typescript-eslint',
+        'i18next'
     ],
     rules: {
         'react/jsx-indent': [2, 4],
@@ -32,7 +36,8 @@ module.exports = {
         'import/extensions': 'off',
         'import/no-extraneous-dependencies': 'off',
         'no-underscore-dangle': 'off',
-        'quotes': [2, 'single', {'avoidEscape': true }]
+        'quotes': [2, 'single', {'avoidEscape': true }],
+        'i18next/no-literal-string': ['error', {markupOnly: true}]
     },
     globals: {
         __IS_DEV__: true,
