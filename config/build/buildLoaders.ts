@@ -55,12 +55,12 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
                 presets: [
                     ['@babel/preset-env']
                 ],
-                'plugins': [
+                plugins: [
                     [
                         'i18next-extract',
                         {
-                            'locales': ['ru', 'en'],
-                            'keyAsDefaultValue': true
+                            locales: ['ru', 'en'],
+                            keyAsDefaultValue: true
                         }
                     ]
                 ]
