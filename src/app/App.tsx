@@ -12,6 +12,7 @@ const App = () => {
     return (
         <div className={classNames('app', {hovered: false}, [theme])}>
             <Suspense fallback=''>
+                
                 <Navbar/>
                 <div className='content-page'>
                     <Sidebar/>
