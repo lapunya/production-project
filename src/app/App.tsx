@@ -1,5 +1,4 @@
 
-import './styles/index.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTheme } from './providers/ThemeProvider';
 import { AppRouter } from './providers/router';
@@ -12,7 +11,6 @@ const App = () => {
     return (
         <div className={classNames('app', {hovered: false}, [theme])}>
             <Suspense fallback=''>
-                
                 <Navbar/>
                 <div className='content-page'>
                     <Sidebar/>
