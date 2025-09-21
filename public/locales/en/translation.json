@@ -12,5 +12,7 @@
     "Вызвать ошибку": "Generate error",
     "Язык сокращенный": "Eng",
     "Войти": "Log in",
-    "Текст рыба": "Lorem"
+    "Текст рыба": "Lorem",
+    "increment": "Increment",
+    "decrement": "Decrement"
 }
