@@ -23,7 +23,7 @@ export const Navbar = ({className}: NavbarProps) => {
     return (
         <div className={classNames(cls.navbar, {}, [className])}>
             <Button 
-                theme={ButtonTheme.CLEAR} 
+                theme={ButtonTheme.BACKGROUND} 
                 className={cls.links}
                 onClick={onToggleModal}
             >

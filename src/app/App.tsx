@@ -9,7 +9,7 @@ import { Suspense } from 'react';
 const App = () => {
     const {theme} = useTheme();
     return (
-        <div className={classNames('app', {hovered: false}, [theme])}>
+        <div className={classNames('app', {hovered: false}, [])}>
             <Suspense fallback=''>
                 <Navbar/>
                 <div className='content-page'>
