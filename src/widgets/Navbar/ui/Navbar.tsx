@@ -3,7 +3,7 @@ import cls from './Navbar.module.scss';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useState } from 'react';
-import { Modal } from 'shared/ui/Modal/Modal';
+import { LoginModal } from 'features/AuthByUsername';
 
 interface NavbarProps {
     className?: string
@@ -16,22 +16,27 @@ export const Navbar = ({className}: NavbarProps) => {
 
     // при изменении пропса компонет перерисовывается, поэтому функцию оборачиваем в useCallback, чтобы ссылка на
     // функцию не менялась пока не меняется массив зависимостей
-    const onToggleModal = useCallback(() => {
-        setIsAuthModal(prev => !prev)
-    }, [setIsAuthModal])
+    const onCloseModal = useCallback(() => {
+        setIsAuthModal(false)
+    }, [setIsAuthModal]);
+
+    const onShowModal = useCallback(() => {
+        setIsAuthModal(true)
+    }, [setIsAuthModal]);
 
     return (
         <div className={classNames(cls.navbar, {}, [className])}>
             <Button 
                 theme={ButtonTheme.BACKGROUND} 
                 className={cls.links}
-                onClick={onToggleModal}
+                onClick={onShowModal}
             >
                 {t('Войти')}
             </Button>
-            <Modal isOpen={isAuthModal} onClose={onToggleModal}>
-                {t('Текст рыба')}
-            </Modal>
+            <LoginModal
+                isOpen={isAuthModal}
+                onClose={onCloseModal}
+            />
         </div>
     )
 }

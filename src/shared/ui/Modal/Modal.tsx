@@ -2,20 +2,20 @@ import {classNames} from 'shared/lib/classNames/classNames';
 import cls from './Modal.module.scss';
 import {FC, ReactNode, useCallback, useEffect, useRef, useState} from 'react';
 import { Portal } from '../Portal/Portal';
-import { useTheme } from 'app/providers/ThemeProvider';
 
 interface ModalProps {
     className?: string;
     children?: ReactNode;
     isOpen?: boolean;
-    onClose?: () => void
+    onClose?: () => void;
+    lazy?: boolean;
 }
 
 export const Modal:FC<ModalProps> = (props) => {
     const [isClosing, setIsClosing] = useState(false);
     const timeRef = useRef<ReturnType<typeof setTimeout>>();
-    const {className, children, isOpen, onClose} = props;
-    const {theme} = useTheme();
+    const {children, isOpen, onClose, lazy} = props;
+    const [isMounted, setIsMounted] = useState(false);
 
     const mods: Record<string, boolean> = {
         [cls.opened]: isOpen,
@@ -30,7 +30,7 @@ export const Modal:FC<ModalProps> = (props) => {
                 setIsClosing(false);
             }, 300)
         }
-    }, [onClose, ])
+    }, [onClose])
     // на каждый перерендер компонента эти функции создаются заново и у каждой из этих функций новая ссылка
     // поэтому лучше обернуть это в useCallback, тогда ссылка сохранится, если в массиве зависимостей нет изменений
     const onKeyDown = useCallback((e: KeyboardEvent) => {
@@ -53,6 +53,14 @@ export const Modal:FC<ModalProps> = (props) => {
             removeEventListener('keydown', onKeyDown);
         }
     }, [isOpen, onKeyDown])
+
+    useEffect(() => {
+        if(isOpen) {
+            setIsMounted(true)
+        }
+    }, [isOpen])
+
+    if(lazy && !isMounted) return null;
 
     return (
         <Portal>

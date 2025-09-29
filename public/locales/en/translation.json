@@ -14,5 +14,7 @@
     "Войти": "Log in",
     "Текст рыба": "Lorem",
     "increment": "Increment",
-    "decrement": "Decrement"
+    "decrement": "Decrement",
+    "Логин": "Login",
+    "Пароль": "Password"
 }
