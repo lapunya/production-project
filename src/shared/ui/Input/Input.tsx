@@ -1,5 +1,4 @@
 import {classNames} from 'shared/lib/classNames/classNames';
-import cls from './Input.module.scss';
 import React, {InputHTMLAttributes, memo} from 'react';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
@@ -27,7 +26,7 @@ export const Input = memo((props: InputProps) => {
     }
 
     return (
-        <div className={classNames(cls.input, {}, [className])}>
+        <div className={classNames('', {}, [className])}>
             <label>{label}</label>
             <input 
                 type={type}
