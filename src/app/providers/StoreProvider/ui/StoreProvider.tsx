@@ -1,4 +1,4 @@
-import {FC, ReactNode} from 'react';
+import {ReactNode} from 'react';
 import { Provider } from 'react-redux';
 import { createReduxStore } from '../config/store';
 import { StateShema } from '../config/StateShema';
@@ -9,7 +9,7 @@ interface StoreProviderProps {
     initialState?: DeepPartial<StateShema>;
 }
 
-export const StoreProvider:FC<StoreProviderProps> = (props) => {
+export const StoreProvider = (props: StoreProviderProps) => {
     const {children, initialState} = props;
 
     const store = createReduxStore(initialState as StateShema);

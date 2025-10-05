@@ -107,3 +107,9 @@ XL.args = {
     theme: ButtonTheme.BACKGROUND_INVERTED,
     size: ButtonSize.XL
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+    children: 'Disabled',
+    disabled: true
+};

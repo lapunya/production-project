@@ -12,9 +12,11 @@
     "Вызвать ошибку": "Generate error",
     "Язык сокращенный": "Eng",
     "Войти": "Log in",
+    "Выйти": "Log out",
     "Текст рыба": "Lorem",
     "increment": "Increment",
     "decrement": "Decrement",
     "Логин": "Login",
-    "Пароль": "Password"
+    "Пароль": "Password",
+    "Форма авторизации": "Login form"
 }

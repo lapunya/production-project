@@ -1,7 +1,8 @@
 import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 import { StateShema } from "./StateShema";
-import { counterReducer } from "entities/Counter";
-import { userReducer } from "entities/User";
+import { counterReducer } from "../../../../entities/Counter";
+import { userReducer } from "../../../../entities/User";
+import { loginReducer } from "features/AuthByUsername";
 
 // удобно объявить именно фукнцию для создания store, чтобы потом ее переиспользовать, например, в тестировании
 // плюс есть возможность передавать в нее initialState, опять же для тестов
@@ -9,7 +10,8 @@ import { userReducer } from "entities/User";
 export function createReduxStore(initialState: StateShema) {
     const rootReducers: ReducersMapObject<StateShema> = {
         counter: counterReducer,
-        user: userReducer
+        user: userReducer,
+        loginForm: loginReducer
     }
     return configureStore<StateShema>({
         reducer: rootReducers,

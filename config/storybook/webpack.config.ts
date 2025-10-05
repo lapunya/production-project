@@ -1,4 +1,4 @@
-import webpack, { RuleSetRule } from "webpack"
+import webpack, { DefinePlugin, RuleSetRule } from "webpack"
 import { BuildPaths } from "../build/types/config"
 import path from "path"
 import { buildCssLoader } from "../build/loaders/buildCssLoaders"
@@ -11,7 +11,7 @@ export default ({config}: {config: webpack.Configuration}) => {
         src: path.resolve(__dirname, '..', '..', 'src')
     }
     config.resolve?.modules?.push(paths.src);
-    config.resolve?.extensions?.push('ts', 'tsx');
+    config.resolve?.extensions?.push('.ts', '.tsx');
     // eslint-disable-next-line no-param-reassign
     let formattedRules = 
         config.module?.rules?.map((rule?: undefined | null | false | "" | 0 | RuleSetRule | "...") => {
@@ -30,6 +30,10 @@ export default ({config}: {config: webpack.Configuration}) => {
     });
 
     formattedRules?.push(buildCssLoader(true));
+
+    config.plugins?.push(new DefinePlugin({
+        __IS_DEV__: true
+    }))
 
     return {...config, module: {...config.module, rules: [...formattedRules || []]}}
 }
