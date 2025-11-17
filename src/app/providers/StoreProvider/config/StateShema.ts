@@ -2,6 +2,7 @@ import { AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject } f
 import { CounterShema } from "../../../../entities/Counter";
 import { UserShema } from "../../../../entities/User";
 import { LoginShema } from "features/AuthByUsername";
+import { ProfileShema } from "../../../../entities/Profile";
 
 export interface StateShema {
     counter: CounterShema;
@@ -9,6 +10,7 @@ export interface StateShema {
 
     // Async reducers:
     loginForm?: LoginShema;
+    profile?: ProfileShema;
 }
 
 export type StateShemaKey = keyof StateShema

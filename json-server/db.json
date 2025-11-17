@@ -25,5 +25,12 @@
       "password": "123"
     }
   ],
-  "profile": { "name": "typicode" }
+  "profile": { 
+    "name": "Name", 
+    "lastname": "Last", 
+    "age": 21, 
+    "city": "city", 
+    "country": "country",
+    "currency": "RUB"
+  }
 }

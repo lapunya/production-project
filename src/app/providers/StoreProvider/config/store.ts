@@ -30,3 +30,5 @@ export function createReduxStore(
 
     return store
 }
+// тип диспатча - тип возвращаемого значения из функции createReduxStore, точнее свойство dispatch
+export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];

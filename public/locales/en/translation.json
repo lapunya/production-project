@@ -18,5 +18,6 @@
     "decrement": "Decrement",
     "Логин": "Login",
     "Пароль": "Password",
-    "Форма авторизации": "Login form"
+    "Форма авторизации": "Login form",
+    "Профиль": "Profile"
 }

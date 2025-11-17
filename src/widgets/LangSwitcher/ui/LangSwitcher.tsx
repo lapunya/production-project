@@ -1,5 +1,5 @@
 import {classNames} from 'shared/lib/classNames/classNames';
-import {FC} from 'react';
+import {memo} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 
@@ -8,7 +8,8 @@ interface LangSwitcherProps {
     short?: boolean;
 }
 
-export const LangSwitcher:FC<LangSwitcherProps> = (props) => {
+// eslint-disable-next-line react/display-name
+export const LangSwitcher = memo((props: LangSwitcherProps) => {
     const {t, i18n} = useTranslation();
     const toggle = async() => {
         i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
@@ -24,4 +25,4 @@ export const LangSwitcher:FC<LangSwitcherProps> = (props) => {
             {t(props?.short ? 'Язык сокращенный' : 'Язык')}
         </Button>
     );
-}
+})

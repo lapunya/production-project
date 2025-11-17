@@ -29,17 +29,6 @@
   flex-direction: column;
 }
 
-.item {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  color: var(--inverted-primary-color);
-}
-
-.link {
-  margin-left: 10px;
-}
-
 .collapsed {
   width: var(--sidebar-width-collapsed);
 
