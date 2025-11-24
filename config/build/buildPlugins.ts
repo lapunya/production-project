@@ -17,7 +17,8 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
 
         // с помощью DefinePlugin можно прокидывать в приложение глобальные переменные
         new webpack.DefinePlugin({
-            __IS_DEV__: JSON.stringify(options.isDev)
+            __IS_DEV__: JSON.stringify(options.isDev),
+            __API__: JSON.stringify(options.apiUrl)
         })
     ]
 
