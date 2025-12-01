@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware, ReducersMapObject } from "@reduxjs/toolkit";
+import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
 import { StateShema } from "./StateShema";
 import { counterReducer } from "../../../../entities/Counter";
 import { userReducer } from "../../../../entities/User";

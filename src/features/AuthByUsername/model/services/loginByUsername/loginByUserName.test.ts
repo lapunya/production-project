@@ -1,13 +1,6 @@
-import axios from "axios" 
 import { loginByUsername } from "./loginByUserName";
 import { userActions } from "entities/User";
 import { TestAsyncThunk } from "shared/lib/tests/TestAsyncThunk/TestAsyncThunk";
-
-// любые запросы на сервер в тестах необходимо мокать
-jest.mock('axios');
-
-// кроме самого модуля мокаем его внутренние поля
-const mockedAxios = jest.mocked(axios, true);
 
 describe('loginByUserName', () => {
     // мокаем dispatch и getState для передачи их в action
@@ -21,20 +14,17 @@ describe('loginByUserName', () => {
     // функцию делаем асинхронной, потому что это асинхронный экшн
     test('Success login', async() => {
         const userValue = {username: '123', id: '1'}
-
-        // post - это одно из внутренних полей модуля
-        // мокаем тут, указываем, что возвращается промис
-        mockedAxios.post.mockReturnValue(Promise.resolve({data: userValue}));
-
         // createAsyncThunk это action creator, то есть возвращает action
         // который нужно передать в dispatch и нам возвращаются какие-то данные
         // const action = loginByUsername({username: '123', password: '123'})
         // const result = await action(dispatch, getState, undefined);
 
         // создаем экземпляр класса
-        const thunk = new TestAsyncThunk(loginByUsername)
+        const thunk = new TestAsyncThunk(loginByUsername);
+        // мокаем тут, указываем, что возвращается промис
+        thunk.api.post.mockReturnValue(Promise.resolve({data: userValue}));
         const result = await thunk.callThunk({username: '123', password: '123'})
-        // теперь в зависимости от того, чтомы получили в result, можем запускать различные test cases
+        // теперь в зависимости от того, что мы получили в result, можем запускать различные test cases
 
         // проверяем был ли вызван dispatch
         // проверяем не сам факт вызова, а то с каким аргументом был вызов
@@ -44,19 +34,19 @@ describe('loginByUserName', () => {
         expect(thunk.dispatch).toHaveBeenCalledTimes(3);
 
         // проверяем был ли вызван метод post
-        expect(mockedAxios.post).toHaveBeenCalled();
+        expect(thunk.api.post).toHaveBeenCalled();
         // проверяем, что asyncThunk сработал без ошибок
         expect(result.meta.requestStatus).toEqual('fulfilled');
     });
     test('Error login', async() => {
         // сценарий, когда сервер вернул статус 403, то есть запрос сработал с ошибкой
-        mockedAxios.post.mockReturnValue(Promise.resolve({status: 403}));
-        const thunk = new TestAsyncThunk(loginByUsername)
+        const thunk = new TestAsyncThunk(loginByUsername);
+        thunk.api.post.mockReturnValue(Promise.resolve({status: 403}));
         const result = await thunk.callThunk({username: '123', password: '123'})
 
         expect(thunk.dispatch).toHaveBeenCalledTimes(2);
-        expect(mockedAxios.post).toHaveBeenCalled();
+        expect(thunk.api.post).toHaveBeenCalled();
         // проверяем, что asyncThunk сработал с ошибкой
-        expect(result.meta.requestStatus).toEqual('rejected');
+        expect(result.meta.requestStatus).toBe('rejected');
     })
 })

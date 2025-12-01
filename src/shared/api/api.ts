@@ -1,5 +1,5 @@
-import { LOCAL_STORAGE_THEME_KEY } from "app/providers/ThemeProvider/lib/ThemeContext";
 import axios from "axios";
+import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
 
 // инстанс аксиоса
 export const $api = axios.create({
@@ -7,6 +7,6 @@ export const $api = axios.create({
     // заголовок, который требуется для получения данных авторизованным пользователем
     headers: {
         // проверяется наличие самого заголовка
-        authorization: localStorage.getItem(LOCAL_STORAGE_THEME_KEY)
+        authorization: localStorage.getItem(USER_LOCALSTORAGE_KEY) || ''
     }
 })
