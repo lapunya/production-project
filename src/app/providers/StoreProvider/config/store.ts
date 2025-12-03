@@ -1,4 +1,4 @@
-import { configureStore, ReducersMapObject } from "@reduxjs/toolkit";
+import { AnyAction, CombinedState, configureStore, Reducer, ReducersMapObject } from "@reduxjs/toolkit";
 import { StateShema } from "./StateShema";
 import { counterReducer } from "../../../../entities/Counter";
 import { userReducer } from "../../../../entities/User";
@@ -23,7 +23,7 @@ export function createReduxStore(
     const reducerManager = createReducerManager(rootReducers)
 
     const store = configureStore({
-        reducer: reducerManager.reduce,
+        reducer: reducerManager.reduce as Reducer<CombinedState<StateShema>, AnyAction>,
         devTools: __IS_DEV__, // отключаем девтулзы в prod режиме
         preloadedState: initialState,
         middleware: getDefaultMiddleware => getDefaultMiddleware({

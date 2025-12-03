@@ -2,6 +2,7 @@ import {classNames} from 'shared/lib/classNames/classNames';
 import cls from './Modal.module.scss';
 import {FC, ReactNode, useCallback, useEffect, useRef, useState} from 'react';
 import { Portal } from '../Portal/Portal';
+import { Mods } from 'shared/lib/classNames/classNames';
 
 interface ModalProps {
     className?: string;
@@ -17,7 +18,7 @@ export const Modal:FC<ModalProps> = (props) => {
     const {children, isOpen, onClose, lazy} = props;
     const [isMounted, setIsMounted] = useState(false);
 
-    const mods: Record<string, boolean> = {
+    const mods: Mods = {
         [cls.opened]: isOpen,
         [cls.closing]: isClosing
     }

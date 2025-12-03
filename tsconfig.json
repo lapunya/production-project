@@ -25,7 +25,10 @@
     "allowSyntheticDefaultImports": true,
 
     // позволяет работать с пакетами, которые используют common js, как с обычными с помощью import
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    // включает строгий режим typescript
+    "strict": true,
   },
   "ts-node": {
     "compilerOptions": {

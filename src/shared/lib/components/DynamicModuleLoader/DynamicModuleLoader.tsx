@@ -22,15 +22,15 @@ export const DynamicModuleLoader = (props: DynamicModuleLoaderProps) => {
     
     useEffect(() => {
         // в момент монтирования компонента добавляем асинхронный reducer в стор
-        Object.entries(reducers).forEach(([name, reducer]: ReducersListEntry) => {
-            store.reducerManager.add(name, reducer)
+        Object.entries(reducers).forEach(([name, reducer]) => {
+            store.reducerManager.add(name as StateShemaKey, reducer)
             dispatch({type: 'MOUNT'})
         })
         // в момент демонтирования компонента удаляем асинхронный reducer в стор
         if(removeAfterUnmount) {
             return () => {
-                Object.keys(reducers).forEach((name: StateShemaKey) => {
-                    store.reducerManager.remove(name);
+                Object.keys(reducers).forEach((name) => {
+                    store.reducerManager.remove(name as StateShemaKey);
                     dispatch({type: 'UNMOUNT'})
                 })
             }
