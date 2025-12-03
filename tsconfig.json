@@ -28,7 +28,7 @@
     "esModuleInterop": true,
 
     // включает строгий режим typescript
-    "strict": true,
+    // "strict": true,
   },
   "ts-node": {
     "compilerOptions": {

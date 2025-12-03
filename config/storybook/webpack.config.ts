@@ -12,24 +12,6 @@ export default ({config}: {config: webpack.Configuration}) => {
     }
     config.resolve?.modules?.push(paths.src);
     config.resolve?.extensions?.push('.ts', '.tsx');
-    
-    // Fix for yoga-layout-prebuilt native module issue
-    config.resolve = {
-        ...config.resolve,
-        fallback: {
-            ...config.resolve?.fallback,
-            fs: false,
-            path: false,
-        },
-    };
-    
-    // Exclude yoga-layout-prebuilt from webpack processing
-    config.externals = config.externals || [];
-    if (Array.isArray(config.externals)) {
-        config.externals.push({
-            'yoga-layout-prebuilt': 'commonjs yoga-layout-prebuilt',
-        });
-    }
     // eslint-disable-next-line no-param-reassign
     let formattedRules = 
         config.module?.rules?.map((rule?: undefined | null | false | "" | 0 | RuleSetRule | "...") => {
@@ -52,11 +34,6 @@ export default ({config}: {config: webpack.Configuration}) => {
     config.plugins?.push(new DefinePlugin({
         __IS_DEV__: JSON.stringify(true),
         __API__: JSON.stringify('')
-    }))
-    
-    // Ignore yoga-layout-prebuilt native bindings to prevent writeFile errors
-    config.plugins?.push(new webpack.IgnorePlugin({
-        resourceRegExp: /yoga-layout-prebuilt\/yoga-layout\/build\/Release\/nbind\.js$/,
     }))
 
     return {...config, module: {...config.module, rules: [...formattedRules || []]}}
