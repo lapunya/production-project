@@ -110,5 +110,10 @@
         "preset": "iPhone 7"
       }
     }
+  },
+  "overrides": {
+    "yoga-layout-prebuilt": {
+      "optionalDependencies": false
+    }
   }
 }
